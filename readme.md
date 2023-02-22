@@ -160,6 +160,15 @@ That case is more private because you can disable wifi-card
 on your target device and avoid getting information  
 about environment by scanning nearly wifi-networks.  
 
+### Upd. Its works with raspberry zero w v1.1!
+Just invoke this before main part:
+```
+echo "deb http://archive.raspbian.org/raspbian bullseye main contrib non-free" | sudo tee /etc/apt/sources.list
+sudo apt-get update -y
+sudo apt-get install -y lshw
+sudo apt install --reinstall grub-efi
+sudo apt install grub-common
+```
 
 
 
