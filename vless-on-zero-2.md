@@ -13,6 +13,9 @@ VPS with static ip in allowed-to-connect subnet from one of approved 😏 hostin
 For our has-no-admin-access device with corporate-network-vpn
 ability to get connection to global internet in case of blocking everything except several approved subnets
 
+### Setup xray on server
+Follow instructions (only first server - exit node) from https://github.com/Letowski/wg2vless/tree/master
+
 ### Links
 https://www.raspberrypi.com/software/  
 https://github.com/Mange/rtl8192eu-linux-driver 
@@ -183,3 +186,6 @@ cp vless-on-zero-2/config.json /usr/local/etc/xray/config.json
 systemctl restart xray
 timeout 5s systemctl status xray
 ```
+
+#### Summary
+that build provides 3-7 mbps (1.5 mbps on first two seconds of speedtest)
