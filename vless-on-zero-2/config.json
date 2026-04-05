@@ -1,0 +1,75 @@
+{
+  "log": {
+    "loglevel": "debug"
+  },
+  "inbounds": [
+    {
+      "port": 20170,
+      "protocol": "socks",
+      "listen": "127.0.0.1",
+      "sniffing": {
+        "enabled": false,
+        "destOverride": ["http", "tls"],
+        "metadataOnly": false
+      },
+      "settings": {
+        "auth": "noauth",
+        "udp": true
+      },
+      "streamSettings": null,
+      "tag": "socks_ipv4"
+    }
+  ],
+  "outbounds": [
+    {
+      "tag": "proxy",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "IP_EXIT",
+            "port": 443,
+            "users": [
+              {
+                "id": "XRAY_UUID",
+                "encryption": "none",
+                "flow": "xtls-rprx-vision"
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "tcp",
+        "security": "reality",
+        "realitySettings": {
+          "serverName": "XRAY_SITE",
+          "fingerprint": "chrome",
+          "publicKey": "XRAY_PUBLIC",
+          "shortId": "XRAY_SHORT"
+        },
+        "sockopt": {}
+      }
+    },
+    {
+      "tag": "direct",
+      "protocol": "freedom",
+      "settings": {
+        "domainStrategy": "UseIP"
+      },
+      "streamSettings": {
+        "sockopt": {}
+      }
+    }
+  ],
+  "routing": {
+    "domainStrategy": "IPOnDemand",
+    "rules": [
+      {
+        "type": "field",
+        "outboundTag": "proxy",
+        "port": "0-65535"
+      }
+    ]
+  }
+}
